@@ -1,0 +1,626 @@
+{
+  "Cisco-IOS-XE-native:native": {
+    "version": "17.9",
+    "boot-start-marker": [null],
+    "boot-end-marker": [null],
+    "banner": {
+      "login": {
+        "banner": "Banner updated via RESTCONF"
+      },
+      "motd": {
+        "banner": "\nWelcome to the DevNet Sandbox for Cat8000V and IOS XE\n\nThe following programmability features are already enabled:\n\n-NETCONF\n-RESTCONF\n\nThanks for stopping by.\n"
+      }
+    },
+    "memory": {
+      "free": {
+        "low-watermark": {
+          "processor": 63709
+        }
+      }
+    },
+    "call-home": {
+      "Cisco-IOS-XE-call-home:contact-email-addr": "sch-smart-licensing@cisco.com",
+      "Cisco-IOS-XE-call-home:tac-profile": {
+        "profile": {
+          "CiscoTAC-1": {
+            "active": true,
+            "destination": {
+              "transport-method": "http"
+            }
+          }
+        }
+      }
+    },
+    "service": {
+      "password-encryption": [null],
+      "timestamps": {
+        "debug-config": {
+          "datetime": {
+            "msec": [null]
+          }
+        },
+        "log-config": {
+          "datetime": {
+            "msec": [null]
+          }
+        }
+      },
+      "call-home": [null],
+      "dhcp": [null]
+    },
+    "platform": {
+      "Cisco-IOS-XE-platform:console": {
+        "output": "virtual"
+      },
+      "Cisco-IOS-XE-platform:qfp": {
+        "utilization": {
+          "monitor": {
+            "load": 80
+          }
+        }
+      },
+      "Cisco-IOS-XE-platform:punt-keepalive": {
+        "disable-kernel-core": true
+      }
+    },
+    "hostname": "sancorp-r1",
+    "username": [
+      {
+        "name": "developer",
+        "privilege": 15,
+        "secret": {
+          "encryption": "9",
+          "secret": "$9$2uJqUsbtLlISaE$2BvT6b.W0phNXnUxNPzjppa19H0N1JbTT0PDXcWZfdM"
+        }
+      },
+      {
+        "name": "sysAdmin",
+        "privilege": 1,
+        "secret": {
+          "encryption": "9",
+          "secret": "$9$2uJqUsbtLlISaE$2BvT6b.W0phNXnUxNPzjppa19H0N1JbTT0PDXcWZfdM"
+        }
+      }
+    ],
+    "ip": {
+      "domain": {
+        "name": "cisco.com"
+      },
+      "forward-protocol": {
+        "protocol": "nd"
+      },
+      "ftp": {
+        "passive": [null]
+      },
+      "multicast": {
+        "Cisco-IOS-XE-multicast:route-limit": 2147483647
+      },
+      "route": {
+        "ip-route-interface-forwarding-list": [
+          {
+            "prefix": "0.0.0.0",
+            "mask": "0.0.0.0",
+            "fwd-list": [
+              {
+                "fwd": "GigabitEthernet1",
+                "interface-next-hop": [
+                  {
+                    "ip-address": "10.10.20.254"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "scp": {
+        "server": {
+          "enable": [null]
+        }
+      },
+      "ssh": {
+        "rsa": {
+          "keypair-name": "ssh-key"
+        },
+        "ssh-version": "2",
+        "version": 2
+      },
+      "access-list": {
+        "Cisco-IOS-XE-acl:extended": [
+          {
+            "name": "NAT-ACL",
+            "access-list-seq-rule": [
+              {
+                "sequence": "10",
+                "ace-rule": {
+                  "action": "permit",
+                  "protocol": "ip",
+                  "ipv4-address": "192.168.1.0",
+                  "mask": "0.0.0.255",
+                  "dst-any": [null]
+                }
+              }
+            ]
+          },
+          {
+            "name": "Test",
+            "access-list-seq-rule": [
+              {
+                "sequence": "10",
+                "ace-rule": {
+                  "action": "permit",
+                  "protocol": "ip",
+                  "any": [null],
+                  "dst-host-address": "1.1.1.1",
+                  "dst-host": "1.1.1.1"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "Cisco-IOS-XE-http:http": {
+        "authentication": {
+          "local": [null]
+        },
+        "server": true,
+        "secure-server": true
+      },
+      "Cisco-IOS-XE-igmp:igmp": {
+        "snooping": {
+          "querier": {
+          }
+        }
+      },
+      "Cisco-IOS-XE-nat:nat": {
+        "inside": {
+          "source": {
+            "list-interface": {
+              "list": [
+                {
+                  "id": "NAT-ACL",
+                  "interface": [
+                    {
+                      "name": "GigabitEthernet1",
+                      "overload-new": [null]
+                    }
+                  ]
+                }
+              ]
+            },
+            "list": [
+              {
+                "id": "NAT-ACL",
+                "interface": [
+                  {
+                    "name": "GigabitEthernet1",
+                    "overload": [null]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "Cisco-IOS-XE-nbar:nbar": {
+        "classification": {
+          "dns": {
+            "classify-by-domain": [null]
+          }
+        }
+      }
+    },
+    "interface": {
+      "GigabitEthernet": [
+        {
+          "name": "1",
+          "description": "MANAGEMENT INTERFACE - DON'T TOUCH ME",
+          "switchport": {
+            "Cisco-IOS-XE-switch:trunk": {
+              "native": {
+                "vlan-config": {
+                  "tag": true
+                }
+              }
+            }
+          },
+          "ip": {
+            "address": {
+              "primary": {
+                "address": "10.10.20.48",
+                "mask": "255.255.255.0"
+              }
+            }
+          },
+          "logging": {
+            "event": {
+              "link-status": [null]
+            }
+          },
+          "access-session": {
+            "host-mode": "multi-auth"
+          },
+          "Cisco-IOS-XE-ethernet:negotiation": {
+            "auto": true
+          }
+        },
+        {
+          "name": "2",
+          "description": "EIGRP_Routed_Interface",
+          "switchport": {
+            "Cisco-IOS-XE-switch:trunk": {
+              "native": {
+                "vlan-config": {
+                  "tag": true
+                }
+              }
+            }
+          },
+          "ip": {
+            "address": {
+              "primary": {
+                "address": "100.64.0.1",
+                "mask": "255.255.0.0"
+              }
+            },
+            "Cisco-IOS-XE-eigrp:authentication-eigrp": {
+              "authentication": {
+                "key-chain": [
+                  {
+                    "eigrp": 69,
+                    "key-chain-name": "EIGRP69"
+                  }
+                ],
+                "mode": [
+                  {
+                    "eigrp": 69,
+                    "md5": [null]
+                  }
+                ]
+              }
+            }
+          },
+          "logging": {
+            "event": {
+              "link-status": [null]
+            }
+          },
+          "access-session": {
+            "host-mode": "multi-auth"
+          },
+          "Cisco-IOS-XE-ethernet:negotiation": {
+            "auto": true
+          }
+        },
+        {
+          "name": "3",
+          "description": "Network Interface",
+          "switchport": {
+            "Cisco-IOS-XE-switch:trunk": {
+              "native": {
+                "vlan-config": {
+                  "tag": true
+                }
+              }
+            }
+          },
+          "shutdown": [null],
+          "logging": {
+            "event": {
+              "link-status": [null]
+            }
+          },
+          "access-session": {
+            "host-mode": "multi-auth"
+          },
+          "Cisco-IOS-XE-ethernet:negotiation": {
+            "auto": true
+          }
+        }
+      ],
+      "Loopback": [
+        {
+          "name": 0,
+          "ip": {
+            "address": {
+              "primary": {
+                "address": "10.0.0.1",
+                "mask": "255.255.255.0"
+              }
+            }
+          },
+          "logging": {
+            "event": {
+              "link-status": [null]
+            }
+          }
+        },
+        {
+          "name": 10,
+          "ip": {
+            "address": {
+              "primary": {
+                "address": "1.1.1.0",
+                "mask": "255.255.255.254"
+              }
+            }
+          },
+          "logging": {
+            "event": {
+              "link-status": [null]
+            }
+          }
+        },
+        {
+          "name": 109,
+          "description": "Configured by RESTCONF ga jadi",
+          "ip": {
+            "address": {
+              "primary": {
+                "address": "10.255.255.9",
+                "mask": "255.255.255.0"
+              }
+            }
+          },
+          "logging": {
+            "event": {
+              "link-status": [null]
+            }
+          }
+        }
+      ],
+      "VirtualPortGroup": [
+        {
+          "name": 0,
+          "ip": {
+            "address": {
+              "primary": {
+                "address": "192.168.1.1",
+                "mask": "255.255.255.0"
+              }
+            },
+            "Cisco-IOS-XE-nat:nat": {
+              "inside": [null]
+            }
+          },
+          "logging": {
+            "event": {
+              "link-status": [null]
+            }
+          }
+        }
+      ]
+    },
+    "control-plane": {
+    },
+    "logging": {
+      "buffered": {
+        "size-value": 32768,
+        "severity-level": "informational"
+      },
+      "console-config": {
+        "common-config": {
+          "console": {
+            "severity": "notifications"
+          }
+        }
+      },
+      "console-conf": {
+        "console": true
+      },
+      "console": {
+        "severity": "notifications"
+      }
+    },
+    "aaa": {
+      "Cisco-IOS-XE-aaa:new-model": [null],
+      "Cisco-IOS-XE-aaa:authentication": {
+        "login": [
+          {
+            "name": "default",
+            "a1": {
+              "local": [null]
+            }
+          }
+        ]
+      },
+      "Cisco-IOS-XE-aaa:authorization": {
+        "exec": [
+          {
+            "name": "default",
+            "a1": {
+              "local": [null]
+            }
+          }
+        ]
+      },
+      "Cisco-IOS-XE-aaa:session-id": "common"
+    },
+    "login": {
+      "on-success": {
+        "log": {
+        }
+      }
+    },
+    "multilink": {
+      "Cisco-IOS-XE-ppp:bundle-name": "authenticated"
+    },
+    "redundancy": {
+    },
+    "subscriber": {
+      "templating": [null]
+    },
+    "key": {
+      "Cisco-IOS-XE-crypto:chain": [
+        {
+          "name": "EIGRP69",
+          "key": [
+            {
+              "id": "69",
+              "cryptographic-algorithm-choice": {
+                "default": "hmac-sha-256"
+              },
+              "cryptographic-algorithm": "hmac-sha-256",
+              "key-string": {
+                "encryption": "7",
+                "key": "1423373838"
+              },
+              "accept-lifetime": {
+                "lifetime-group-v1": {
+                  "start-hh-mm-ss": "00:00:00",
+                  "start-month": "Oct",
+                  "start-day": 31,
+                  "start-year": 2023,
+                  "infinite": [null]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "ethernet": {
+      "Cisco-IOS-XE-ethernet:cfm": {
+        "alarm": {
+          "delay": 2500,
+          "reset": 10000
+        }
+      }
+    },
+    "crypto": {
+      "Cisco-IOS-XE-crypto:ikev2": {
+        "http-url": {
+          "cert": [null]
+        }
+      },
+      "Cisco-IOS-XE-crypto:pki": {
+        "certificate": {
+          "chain": [
+            {
+              "name": "SLA-TrustPoint",
+              "certificate": [
+                {
+                  "serial": "01",
+                  "certtype": "ca"
+                }
+              ]
+            },
+            {
+              "name": "TP-self-signed-3209586145",
+              "certificate": [
+                {
+                  "serial": "01",
+                  "certtype": "self-signed"
+                }
+              ]
+            }
+          ]
+        },
+        "trustpoint": [
+          {
+            "id": "SLA-TrustPoint",
+            "enrollment": {
+              "enrollment-method": {
+                "pkcs12": [null]
+              },
+              "pkcs12": [null]
+            },
+            "revocation-check": ["crl"]
+          },
+          {
+            "id": "TP-self-signed-3209586145",
+            "enrollment": {
+              "enrollment-method": {
+                "selfsigned": [null]
+              },
+              "selfsigned": [null]
+            },
+            "revocation-check": ["none"],
+            "rsakeypair": {
+              "key-label": "TP-self-signed-3209586145"
+            },
+            "subject-name": "cn=IOS-Self-Signed-Certificate-3209586145"
+          }
+        ]
+      }
+    },
+    "router": {
+      "Cisco-IOS-XE-eigrp:router-eigrp": {
+        "eigrp": {
+          "classic-mode": [
+            {
+              "autonomous-system": 69,
+              "eigrp": {
+                "router-id": "1.1.1.1"
+              },
+              "network": {
+                "address-wildcard": [
+                  {
+                    "ipv4-address": "1.1.1.0",
+                    "wildcard": "0.0.0.1"
+                  },
+                  {
+                    "ipv4-address": "100.64.0.0",
+                    "wildcard": "0.0.255.255"
+                  }
+                ]
+              },
+              "passive-interface": {
+                "default": true
+              }
+            }
+          ]
+        }
+      }
+    },
+    "license": {
+      "udi": {
+        "pid": "C8000V",
+        "sn": "9UOETP9YI0Y"
+      }
+    },
+    "standby": {
+      "redirects": true
+    },
+    "line": {
+      "aux": [
+        {
+          "first": "0"
+        }
+      ],
+      "console": [
+        {
+          "first": "0",
+          "logging": {
+            "synchronous": {
+            }
+          },
+          "stopbits": "1"
+        }
+      ],
+      "vty": [
+        {
+          "first": 0,
+          "last": 4,
+          "length": 0,
+          "logging": {
+            "synchronous": {
+            }
+          },
+          "transport": {
+            "input": {
+              "input": ["ssh"]
+            }
+          }
+        }
+      ]
+    },
+    "iox": {
+    },
+    "Cisco-IOS-XE-diagnostics:diagnostic": {
+      "bootup": {
+        "level": "minimal"
+      }
+    }
+  }
+}
