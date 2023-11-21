@@ -7,7 +7,8 @@ print(
         '10.10.20.48',
         '830',
         'developer',
-        'C1sco12345'
+        'C1sco12345',
+        'iosxe'
     )
 )
 
