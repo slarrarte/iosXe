@@ -1,7 +1,5 @@
 import getRunningConfig, json, loadConfiguration, getCapabilities, customRESTCONF, saveConfig
 from pathlib import Path
-import getRunningConfig, json, loadConfiguration, getCapabilities, customRESTCONF, saveConfig
-from pathlib import Path
 
 # Change hostname
 newHostname = """
