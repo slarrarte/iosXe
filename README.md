@@ -1,5 +1,5 @@
 # iosXe
-NETCONF/RESCONF interaction scripts for IOS XE devices
+NETCONF/RESTCONF interaction scripts for IOS XE devices
 
 REQUIRED PYTHON PACKAGES:
 - requests
