@@ -1,7 +1,5 @@
-import getRunningConfig, json, loadConfiguration, getCapabilities, customRESTCONF, saveConfig
-from pathlib import Path
-import getRunningConfig, json, loadConfiguration, getCapabilities, customRESTCONF, saveConfig
-from pathlib import Path
+import customRESTCONF, saveConfig
+
 
 # Change hostname
 newHostname = """
@@ -149,3 +147,34 @@ print(
     )
 )
 
+# Configure Loopback69
+loopback69 = """
+{
+    "ietf-interfaces:interface": [
+        {
+            "name": "Loopback69",
+            "type": "iana-if-type:softwareLoopback",
+            "enabled": true,
+            "ietf-ip:ipv4": {
+                "address": [
+                    {
+                        "ip": "69.69.69.69",
+                        "netmask": "255.255.255.255"
+                    }
+                ]
+            }
+        }
+    ]
+}
+"""
+
+print(
+    customRESTCONF.customRESTCONF(
+        'put',
+        '10.10.20.48',
+        'ietf-interfaces:interfaces/interface=Loopback69',
+        'developer',
+        'C1sco12345',
+        strData=loopback69
+    )
+)

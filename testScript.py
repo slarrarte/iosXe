@@ -2,15 +2,15 @@ import getRunningConfig, json, loadConfiguration, getCapabilities, customRESTCON
 from pathlib import Path
 
 # Get capabilities
-print(
-    getCapabilities.getCapabilities(
-        '10.10.20.48',
-        '830',
-        'developer',
-        'C1sco12345',
-        'iosxe'
-    )
-)
+# print(
+#     getCapabilities.getCapabilities(
+#         '10.10.20.48',
+#         '830',
+#         'developer',
+#         'C1sco12345',
+#         'iosxe'
+#     )
+# )
 
 # Pull entire config via RESTCONF + Cisco-IOS-XE-native YANG model
 # with open(
@@ -136,3 +136,40 @@ print(
 #         strData=keyChain
 #     )
 # )
+
+# Set on-change telemetry subscription
+onChangeSubscription = """
+{
+    "Cisco-IOS-XE-mdt-cfg:mdt-subscription": [
+        {
+            "subscription-id": "69",
+            "base": {
+                "stream": "yang-push",
+                "encoding": "encode-kvgpb",
+                "dampening period": "0",
+                "xpath": "/ietf-interfaces:interfaces-state/interface[name='Loopback69']/oper-status"
+            },
+            "mdt-receivers": {
+                "address": "10.10.20.50",
+                "port": "57500",
+                "protocol": "grpc-tcp"
+            }
+        }
+    ]
+}
+"""
+
+print(
+    customRESTCONF.customRESTCONF(
+        'get',
+        '10.10.20.48',
+        'Cisco-IOS-XE-mdt-cfg:mdt-config-data/mdt-subscription=69',
+        'developer',
+        'C1sco12345',
+        strData=onChangeSubscription
+    )
+)
+
+# interfaceStateXPath = '/ietf-interfaces:interfaces-state/interface[name="GigabitEthernet2"]/oper-status'
+#
+# /if:interfaces-state/interface[name='GigabitEthernet2']/admin-status
