@@ -1,5 +1,5 @@
 # Load config of a device via RESTCONF
-import requests
+import requests, xml.dom.minidom
 from ncclient import manager
 
 def loadConfigurationRESTCONF(host, string):
@@ -32,4 +32,7 @@ def loadConfigurationNETCONF(host, port, username, password, config):
         device_params={'name': 'iosxe'}
     ) as m:
         netconf_reply = m.edit_config(config=config, target='running')
-        return netconf_reply
+        temp = xml.dom.minidom.parseString(str(netconf_reply.xml))
+        new_xml = temp.toprettyxml(indent=" ", newl="")
+        return new_xml
+

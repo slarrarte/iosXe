@@ -1,5 +1,6 @@
-import getRunningConfig, json, loadConfiguration, getCapabilities, customRESTCONF, saveConfig
+import getRunningConfig, json, loadConfiguration, getCapabilities, customRESTCONF, saveConfig, os
 from pathlib import Path
+import os
 
 # Get capabilities
 # print(
@@ -138,38 +139,95 @@ from pathlib import Path
 # )
 
 # Set on-change telemetry subscription
-onChangeSubscription = """
-{
-    "Cisco-IOS-XE-mdt-cfg:mdt-subscription": [
-        {
-            "subscription-id": "69",
-            "base": {
-                "stream": "yang-push",
-                "encoding": "encode-kvgpb",
-                "dampening period": "0",
-                "xpath": "/ietf-interfaces:interfaces-state/interface[name='Loopback69']/oper-status"
-            },
-            "mdt-receivers": {
-                "address": "10.10.20.50",
-                "port": "57500",
-                "protocol": "grpc-tcp"
-            }
-        }
-    ]
-}
-"""
-
-print(
-    customRESTCONF.customRESTCONF(
-        'get',
-        '10.10.20.48',
-        'Cisco-IOS-XE-mdt-cfg:mdt-config-data/mdt-subscription=69',
-        'developer',
-        'C1sco12345',
-        strData=onChangeSubscription
-    )
-)
-
+# onChangeSubscription = """
+# {
+#     "Cisco-IOS-XE-mdt-cfg:mdt-subscription": [
+#         {
+#             "subscription-id": "69",
+#             "base": {
+#                 "stream": "yang-push",
+#                 "encoding": "encode-kvgpb",
+#                 "dampening period": "0",
+#                 "xpath": "/Cisco-IOS-XE-interfaces-oper:interfaces/interface[name='Loopback69']/oper-status"
+#             },
+#             "mdt-receivers": {
+#                 "address": "10.10.20.50",
+#                 "port": "57500",
+#                 "protocol": "grpc-tcp"
+#             }
+#         }
+#     ]
+# }
+# """
+#
+# print(
+#     customRESTCONF.customRESTCONF(
+#         'post',
+#         '10.10.20.48',
+#         'Cisco-IOS-XE-mdt-cfg:mdt-config-data/mdt-subscription=69',
+#         'developer',
+#         'C1sco12345',
+#         strData=onChangeSubscription
+#     )
+# )
+#
 # interfaceStateXPath = '/ietf-interfaces:interfaces-state/interface[name="GigabitEthernet2"]/oper-status'
 #
 # /if:interfaces-state/interface[name='GigabitEthernet2']/admin-status
+#
+# Get MDT Capabilities
+# print(
+#     customRESTCONF.customRESTCONF(
+#         'get',
+#         '10.10.20.48',
+#         'Cisco-IOS-XE-mdt-capabilities-oper:mdt-capabilities-oper-data',
+#         'developer',
+#         'C1sco12345'
+#     )
+# )
+# print(os.path.dirname(os.path.realpath(__file__)))
+# print(os.path.dirname(__file__))
+# print(os.path.realpath(__file__))
+# print(__file__)
+
+xmlFilter = """
+<config>
+    <interfaces xmlns="http://openconfig.net/yang/interfaces">
+      <interface>
+        <name>Loopback23</name>
+        <config>
+          <name>Loopback23</name>
+          <type xmlns:idx="urn:ietf:params:xml:ns:yang:iana-if-type">idx:softwareLoopback</type>
+          <enabled>true</enabled>
+          <description>Test</description>
+        </config>
+        <subinterfaces>
+          <subinterface>
+            <index>0</index>
+            <ipv4 xmlns="http://openconfig.net/yang/interfaces/ip">
+              <addresses>
+                <address>
+                  <ip>192.192.191.191</ip>
+                  <config>
+                    <ip>192.192.191.191</ip>
+                    <prefix-length>32</prefix-length>
+                  </config>
+                </address>
+              </addresses>
+            </ipv4>
+          </subinterface>
+        </subinterfaces>
+      </interface>
+    </interfaces>
+</config>
+"""
+
+print(
+    loadConfiguration.loadConfigurationNETCONF(
+        "10.10.20.48",
+        "830",
+        "developer",
+        "C1sco12345",
+        xmlFilter
+    )
+)
