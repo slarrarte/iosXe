@@ -7,6 +7,8 @@ xml_filter = open(Path.home()/'python/iosXe/configFiles/keyChain.xml').read()
 # List all hosts to update
 host_ips = ['172.16.100.12', '172.16.100.13']
 
+text_for_document = """"""
+
 # Obtain all key chains for verification, then put output in a file
 for i in host_ips:
     xml_to_dict = xmltodict.parse(
@@ -21,19 +23,15 @@ for i in host_ips:
     )
     key_chain_name = xml_to_dict['rpc-reply']['data']['native']['key']['chain']['name']
     num_of_keys = len(xml_to_dict['rpc-reply']['data']['native']['key']['chain']['key'])
-    text_for_document = f"""
-    Host: {i}
-    Key Chain: {key_chain_name}
-
-    """
-    for i in range(num_of_keys):
+    text_for_document+= f"Host: {i}\nKey Chain: {key_chain_name}\n"
+    for j in range(num_of_keys):
+        text_for_document+= f"\tKey {xml_to_dict['rpc-reply']['data']['native']['key']['chain']['key'][j]['id']}\n\t\tKey String: {xml_to_dict['rpc-reply']['data']['native']['key']['chain']['key'][0]['key-string']}\n\n"
+print(text_for_document)
 
 
 
 
-
-
-    file = open(Path.home()/f'python/iosXe/keyChains/{i}.txt', 'w')
+    # file = open(Path.home()/f'python/iosXe/keyChains/{i}.txt', 'w')
     # file.write(
     #     netconfActions.netconfGetConfig(
     #         i,
