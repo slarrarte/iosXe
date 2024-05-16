@@ -33,4 +33,3 @@ for i in host_ips:
 
 with open(Path.home()/'pyProjects/projects/iosXeLab/eigrpKeys/keyVerification.txt', 'w') as file:
     file.write(text_for_document)
-

@@ -1,0 +1,39 @@
+<config>
+	<native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+		<key>
+			<chain xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-crypto">
+				<name>{key_chain_name}</name>
+				<key>
+					<id>{id}</id>
+					<key-string>
+						<key>{key_string}</key>
+					</key-string>
+					<accept-lifetime>
+						<lifetime-group-v1>
+							<start-hh-mm-ss>{a_start_hh_mm_ss}</start-hh-mm-ss>
+							<start-month>{a_start_month}</start-month>
+							<start-day>{a_start_day}</start-day>
+							<start-year>{a_start_year}</start-year>
+							<end-hh-mm-ss>{a_end_hh_mm_ss}</end-hh-mm-ss>
+							<end-month>{a_end_month}</end-month>
+							<end-day>{a_end_day}</end-day>
+							<end-year>{a_end_year}</end-year>
+						</lifetime-group-v1>
+					</accept-lifetime>
+					<send-lifetime>
+						<lifetime-group-v1>
+							<start-hh-mm-ss>{s_start_hh_mm_ss}</start-hh-mm-ss>
+							<start-month>{s_start_month}</start-month>
+							<start-day>{s_start_day}</start-day>
+							<start-year>{s_start_year}</start-year>
+							<end-hh-mm-ss>{s_end_hh_mm_ss}</end-hh-mm-ss>
+							<end-month>{s_end_month}</end-month>
+							<end-day>{s_end_day}</end-day>
+							<end-year>{s_end_year}</end-year>
+						</lifetime-group-v1>
+					</send-lifetime>
+				</key>
+			</chain>
+		</key>
+	</native>
+</config>
