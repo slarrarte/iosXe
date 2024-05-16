@@ -2,7 +2,7 @@ import netconfActions, xmltodict
 from pathlib import Path
 
 # Path to key chain NETCONF filter
-xml_filter = open(Path.home()/'python/iosXe/configFiles/keyChain.xml').read()
+xml_filter = open(Path.home()/'pyProjects/projects/iosXeLab/eigrpKeys/keyChain.xml').read()
 
 # List all hosts to update
 host_ips = ['172.16.100.12', '172.16.100.13']
@@ -30,4 +30,8 @@ for i in host_ips:
         text_for_document+=f"\t\tExpiration Date: {xml_to_dict['rpc-reply']['data']['native']['key']['chain']['key'][0]['send-lifetime']['lifetime-group-v1']['end-month']} "
         text_for_document+=f"{xml_to_dict['rpc-reply']['data']['native']['key']['chain']['key'][0]['send-lifetime']['lifetime-group-v1']['end-day']} "
         text_for_document+=f"{xml_to_dict['rpc-reply']['data']['native']['key']['chain']['key'][0]['send-lifetime']['lifetime-group-v1']['end-year']}\n\n"
-print(text_for_document)
+
+with open(Path.home()/'pyProjects/projects/iosXeLab/eigrpKeys/keyVerification.txt', 'w') as file:
+    file.write(text_for_document)
+
+

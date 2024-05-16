@@ -1,0 +1,52 @@
+<!--<filter xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">-->
+<!--    <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native"/>-->
+<!--</filter>-->
+<!--<config>-->
+<!--    <key>-->
+<!--        <chain xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-crypto">-->
+<!--            <name>TEST</name>-->
+<!--            <key>-->
+<!--                <id>1</id>-->
+<!--                <key-string>-->
+<!--                    <key>test1</key>-->
+<!--                </key-string>-->
+<!--                <accept-lifetime>-->
+<!--                    <lifetime-group-v1>-->
+<!--                        <start-hh-mm-ss>00:00:00</start-hh-mm-ss>-->
+<!--                        <start-month>Jan</start-month>-->
+<!--                        <start-day>1</start-day>-->
+<!--                        <start-year>2024</start-year>-->
+<!--                        <end-hh-mm-ss>23:59:59</end-hh-mm-ss>-->
+<!--                        <end-month>Feb</end-month>-->
+<!--                        <end-day>1</end-day>-->
+<!--                        <end-year>2024</end-year>-->
+<!--                    </lifetime-group-v1>-->
+<!--                </accept-lifetime>-->
+<!--                <send-lifetime>-->
+<!--                    <lifetime-group-v1>-->
+<!--                        <start-hh-mm-ss>00:00:00</start-hh-mm-ss>-->
+<!--                        <start-month>Jan</start-month>-->
+<!--                        <start-day>1</start-day>-->
+<!--                        <start-year>2024</start-year>-->
+<!--                        <end-hh-mm-ss>23:59:59</end-hh-mm-ss>-->
+<!--                        <end-month>Feb</end-month>-->
+<!--                        <end-day>1</end-day>-->
+<!--                        <end-year>2024</end-year>-->
+<!--                    </lifetime-group-v1>-->
+<!--                </send-lifetime>-->
+<!--            </key>-->
+<!--        </chain>-->
+<!--    </key>-->
+<!--</config>-->
+<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+    <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+        <key>
+            <chain xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-crypto">
+                <name>TEST</name>
+                <key operation="remove">
+                    <id>2</id>
+                </key>
+            </chain>
+        </key>
+    </native>
+</config>

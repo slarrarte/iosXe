@@ -1,4 +1,4 @@
-import getRunningConfig, json, loadConfiguration, getCapabilities, customRESTCONF, saveConfig, os
+import getRunningConfig, json, loadConfiguration, getCapabilities, customRESTCONF, saveConfig, os, customNETCONF
 from pathlib import Path
 import os
 
@@ -190,44 +190,28 @@ import os
 # print(os.path.realpath(__file__))
 # print(__file__)
 
-xmlFilter = """
-<config>
-    <interfaces xmlns="http://openconfig.net/yang/interfaces">
-      <interface>
-        <name>Loopback23</name>
-        <config>
-          <name>Loopback23</name>
-          <type xmlns:idx="urn:ietf:params:xml:ns:yang:iana-if-type">idx:softwareLoopback</type>
-          <enabled>true</enabled>
-          <description>Test</description>
-        </config>
-        <subinterfaces>
-          <subinterface>
-            <index>0</index>
-            <ipv4 xmlns="http://openconfig.net/yang/interfaces/ip">
-              <addresses>
-                <address>
-                  <ip>192.192.191.191</ip>
-                  <config>
-                    <ip>192.192.191.191</ip>
-                    <prefix-length>32</prefix-length>
-                  </config>
-                </address>
-              </addresses>
-            </ipv4>
-          </subinterface>
-        </subinterfaces>
-      </interface>
-    </interfaces>
-</config>
-"""
+####################NETCONF###########################
+
+xmlFile = open(Path.home()/'pyProjects/projects/iosXeLab/configFiles/xmlFilter.xml').read()
+
+# print(
+#     customNETCONF.netconfGetConfig(
+#         '172.16.100.12',
+#         '830',
+#         'test',
+#         'test',
+#         'iosxe',
+#         xmlFile
+#     )
+# )
 
 print(
-    loadConfiguration.loadConfigurationNETCONF(
-        "10.10.20.48",
-        "830",
-        "developer",
-        "C1sco12345",
-        xmlFilter
+    customNETCONF.netconfEditConfig(
+        '172.16.100.12',
+        '830',
+        'test',
+        'test',
+        'iosxe',
+        xmlFile
     )
 )
