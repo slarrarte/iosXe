@@ -1,0 +1,8 @@
+<key>
+    <chain xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-crypto">
+        <name>{_key_chain_name}</name>
+        <key operation="delete">
+            <id>{_id}</id>
+        </key>
+    </chain>
+</key>
