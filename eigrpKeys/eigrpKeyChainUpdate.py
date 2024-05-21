@@ -7,10 +7,10 @@ from pathlib import Path
 # 3.) Recreate new replacement keys
 
 # Import key chain deletion NETCONF filter for formatting
-del_key_chain_filter = open(Path.home()/'pyProjects/projects/iosXeLab/eigrpKeys/eigrpKeyDeletion.xml').read()
+del_key_chain_filter = open(Path.cwd()'/eigrpKeyDeletion.xml').read()
 
 # Import key chain creation NETCONF filter for formatting
-key_chain_filter = open(Path.home()/'pyProjects/projects/iosXeLab/eigrpKeys/eigrpKeyCreation.xml').read()
+key_chain_filter = open(Path.cwd()'/eigrpKeyCreation.xml').read()
 
 # List all hosts to update
 host_ips = ['172.16.100.12', '172.16.100.13', '172.16.100.14']
