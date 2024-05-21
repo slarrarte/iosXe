@@ -15,6 +15,16 @@ key_chain_filter = open(Path.cwd()'/eigrpKeyCreation.xml').read()
 # List all hosts to update
 host_ips = ['172.16.100.12', '172.16.100.13', '172.16.100.14']
 
+# KEY STRING GENERATION FUNCTION
+def generatePassword(num_of_keys, keyLength):
+    keys = []
+    for key in range(num_of_keys):
+        characters = [random.choice(string.ascii_letters + string.digits + string.punctuation) for i in range(keyLength)]
+        random.shuffle(characters)
+        keys.append(''.join(characters))
+    print(keys)
+    return keys
+
 # This will be the netconf payload used to delete keys
 del_netconf_filter_body = f""""""
 
@@ -27,7 +37,7 @@ key_chain_name = 'TEST'
 # List of all the keys you want to update
 id = ['100']
 # Key string list (Keep in same order as the key IDs that you want to be assigned to)
-key_string = ['ONLYkeyREVISED']
+key_string = generatePassword(len(id), 25)
 # All vars below are for Accept-Lifetime
 a_start_hh_mm_ss = ['00:00:00'] * len(id)
 a_start_month = ['Jan', 'Feb', 'Mar']
