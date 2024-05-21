@@ -27,7 +27,7 @@ for i in host_ips:
     for j in range(num_of_keys):
         text_for_document += f"\tKey {xml_to_dict['rpc-reply']['data']['native']['key']['chain']['key'][j]['id']}\n"
         text_for_document += f"\t\tKey String: {xml_to_dict['rpc-reply']['data']['native']['key']['chain']['key'][j]['key-string']['key']}\n"
-       text_for_document += f"\t\tSend Lifetime: {xml_to_dict['rpc-reply']['data']['native']['key']['chain']['key'][j]['send-lifetime']['lifetime-group-v1']}\n"
+        text_for_document += f"\t\tSend Lifetime: {xml_to_dict['rpc-reply']['data']['native']['key']['chain']['key'][j]['send-lifetime']['lifetime-group-v1']}\n"
         text_for_document += f"\t\tAccept Lifetime: {xml_to_dict['rpc-reply']['data']['native']['key']['chain']['key'][j]['accept-lifetime']['lifetime-group-v1']}\n\n"
 
 with open(Path.home()/'pyProjects/projects/iosXeLab/eigrpKeys/keyVerification.txt', 'w') as file:
