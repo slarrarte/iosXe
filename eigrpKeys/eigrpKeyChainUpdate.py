@@ -2,13 +2,6 @@ import netconfActions, saveConfig
 import random, string
 from pathlib import Path
 
-# PROCESS:
-# 1.) Set all variables
-# 2.) Delete old keys
-# 3.) Recreate new replacement keys
-
-# Import key chain deletion NETCONF filter for formatting
-del_key_chain_filter = open(Path.cwd()/'eigrpKeyDeletion.xml').read()
 
 # Import key chain creation NETCONF filter for formatting
 key_chain_filter = open(Path.cwd()/'eigrpKeyCreation.xml').read()
@@ -24,9 +17,6 @@ def generatePassword(num_of_keys, keyLength):
         random.shuffle(characters)
         keys.append(''.join(characters))
     return keys
-
-# This will be the netconf payload used to delete keys
-del_netconf_filter_body = f""""""
 
 # This will be the netconf payload we will push to the devices to update the keys
 netconf_filter_body = f""""""
@@ -59,11 +49,6 @@ s_end_year = ['2027'] * len(id)
 
 # Format key_chain_filter with desired vars (vars that start with _ are from key_chain_filter
 for i in range(len(id)):
-    # Format del_key_chain_filter with variables
-    mod_del_key_chain_filter = del_key_chain_filter.format(
-        _key_chain_name=key_chain_name,
-        _id=id[i]
-    )
     # Format key_chain_filter with variables
     mod_key_chain_filter = key_chain_filter.format(
         _key_chain_name = key_chain_name,
@@ -87,14 +72,11 @@ for i in range(len(id)):
         _s_end_year = s_end_year[i],
     )
     if i != range(len(id))[-1]:
-        del_netconf_filter_body += mod_del_key_chain_filter + '\n'
         netconf_filter_body += mod_key_chain_filter + '\n'
     else:
-        del_netconf_filter_body += mod_del_key_chain_filter
         netconf_filter_body += mod_key_chain_filter
 
-# Adding the <config><native></native></config> tags to beginning and end of payload
-del_final_netconf_filter = '<config>\n<native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">\n' + del_netconf_filter_body + '\n</native>\n</config>'
+# Adding the <config><native><all_remaining_tags/></native></config> tags to beginning and end of payload
 final_netconf_filter = (f"""<config>
     <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
         <key>
