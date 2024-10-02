@@ -2,7 +2,7 @@ import netconfActions, xmltodict
 from pathlib import Path
 
 # Path to key chain NETCONF filter
-xml_filter = open(Path.home()/'pyProjects/projects/iosXeLab/eigrpKeys/keyChain.xml').read()
+xml_filter = open(Path.home()/'').read()
 
 # List all hosts to update
 host_ips = ['']
