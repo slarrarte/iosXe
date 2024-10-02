@@ -7,7 +7,7 @@ from pathlib import Path
 key_chain_filter = open(Path.cwd()/'eigrpKeyCreation.xml').read()
 
 # List all hosts to update
-host_ips = ['172.16.100.12', '172.16.100.13', '172.16.100.14']
+host_ips = ['']
 
 # KEY STRING GENERATION FUNCTION
 def generatePassword(num_of_keys, keyLength):
