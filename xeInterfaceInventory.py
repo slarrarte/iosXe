@@ -6,10 +6,10 @@ from getpass import getpass
 import xmltodict, csv
 
 # Path to csv file
-database_path = '/Users/santiagolarrarte/pyProjects/projects/iosXeLab/dataCollection/xeInterfaceInventory.csv'
+database_path = ''
 
 # List all the router IPs that you'd like included in the data gathering
-router_loopbacks = ['172.16.52.13', '172.16.52.14']
+router_loopbacks = ['']
 
 # For security purposes, username and password will be entered at user input prompt
 enter_username = input('Username: \n')
