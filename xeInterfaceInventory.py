@@ -30,6 +30,33 @@ interface_data_list = [
     ['Hostname', 'Interface', 'IP', 'Mask', 'Description']
 ]
 
+# Row-generating function
+def interface_rows(router_response):
+    # Reference global variable interface_data_list for row appending
+    global interface_data_list
+    # Hostname
+    hostname = router_response['rpc-reply']['data']['native']['hostname']
+    # Shortcut for parsing
+    interfaces = router_response['rpc-reply']['data']['interfaces']['interface']
+    # Row-generating loop
+    for interface in interfaces:
+        row = []
+        # Hostname
+        if interfaces[0] == interface:
+            row.append(hostname)
+        else:
+            row.append('')
+        # Interface
+        row.append(interface.get('name', ''))
+        # IP
+        row.append(interface.get('ipv4', {}).get('address', {}).get('ip', ''))
+        # Mask
+        row.append(interface.get('ipv4', {}).get('address', {}).get('netmask', ''))
+        # Description
+        row.append(interface.get('description', ''))
+        # Append row to interface_data_list
+        interface_data_list.append(row)
+
 # <get> each router in router_loopbacks
 for router in router_loopbacks:
     # Exception handling for when a node is unreachable
@@ -44,46 +71,12 @@ for router in router_loopbacks:
                 filter=xml_filter
             )
         )
-        # Parsing per interface on router
-        for interface in range(len(router_response['rpc-reply']['data']['interfaces']['interface'])):
-            # Sub-list to be appended to interface_data_list
-            host_list = []
-            # Hostname will be added to host_list[0] only if this is the first interface of said host;
-            # otherwise, host_list[0] will be empty.
-            if interface == 0:
-                host_list.append(router_response['rpc-reply']['data']['native']['hostname'])
-            else:
-                host_list.append('')
-            # Interface
-            host_list.append(
-                router_response['rpc-reply']['data']['interfaces']['interface'][interface]['name']
-            )
-            # IP
-            try:
-                host_list.append(
-                    router_response['rpc-reply']['data']['interfaces']['interface'][interface]['ipv4']['address']['ip']
-                )
-            except:
-                host_list.append('')
-            # Mask
-            try:
-                host_list.append(
-                    router_response['rpc-reply']['data']['interfaces']['interface'][interface]['ipv4']['address']['netmask']
-                )
-            except:
-                host_list.append('')
-            # Description
-            try:
-                host_list.append(
-                    router_response['rpc-reply']['data']['interfaces']['interface'][interface]['description']
-                )
-            except:
-                host_list.append('')
-            # Write sublist to interface_data_list
-            interface_data_list.append(host_list)
-    # Writes IP as hostname with blank arguments if router is unreachable
+        # Append rows to interface_data_list
+        interface_rows(router_response)
+        print(f'Successfully connected to router {router}')
     except:
-        interface_data_list.append([router, '', '', '', '', ''])
+        print(f'Issue connecting to or pulling data from router {router}')
+        interface_data_list.append(['', '', '', '', ''])
         continue
 
 # Import csv file into program and modify it with gathered NETCONF data
